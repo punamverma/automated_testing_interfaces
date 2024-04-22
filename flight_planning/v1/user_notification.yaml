@@ -11,8 +11,8 @@ components:
         - impacted_flight_id
       properties:
         intersection_detected_at:
-          schema:
-            $ref: './geotemporal.yaml#/components/schemas/Time'
+          anyOf:
+            - $ref: './geotemporal.yaml#/components/schemas/Time'
           description: >-
             Time at which the intersection with other operational_intents or constraints was detected by USS.
             Conflict Notification to user can be sent in two scenarios. For the purpose of tests, 
@@ -25,8 +25,8 @@ components:
             When successful, the USS responds back with 200 and a planning result as Completed. 
             The time USS responds with 200 will be taken as the value of intersection_detected_at.
         notification_sent_at:
-          schema:
-            $ref: './geotemporal.yaml#/components/schemas/Time'
+          anyOf:
+            - $ref: './geotemporal.yaml#/components/schemas/Time'
           description: Time at which the user was notified about the conflict or intersection.
         impacted_flight_id:
           description: Flight_id of the user flight that is impacted by the conflict.
