@@ -474,7 +474,7 @@ paths:
             The user notifications are included if they were sent after this time. 
             Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
           schema:
-            $ref: '#/components/schemas/Time'
+            $ref: './geotemporal.yaml#/components/schemas/Time'
           in: query
           required: true
         - name: to
@@ -484,7 +484,7 @@ paths:
             Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
           schema:
             anyOf:
-              - $ref: '#/components/schemas/Time'
+              - $ref: './geotemporal.yaml#/components/schemas/Time'
           in: query
       responses:
         '200':
