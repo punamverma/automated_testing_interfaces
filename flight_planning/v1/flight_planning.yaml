@@ -483,8 +483,7 @@ paths:
             The user notifications are included if they were sent before or upto this time.
             Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
           schema:
-            anyOf:
-              - $ref: './geotemporal.yaml#/components/schemas/Time'
+            $ref: './geotemporal.yaml#/components/schemas/Time'
           in: query
       responses:
         '200':
