@@ -488,6 +488,7 @@ paths:
           in: query
       responses:
         '200':
+          description: Returns list of user notifications sent in the time interval specified by the query parameters.
           content:
             application/json:
               schema:
