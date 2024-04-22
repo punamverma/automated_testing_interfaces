@@ -463,22 +463,25 @@ paths:
       description: >-
         This endpoint allows the test director to instruct the USS to remove a flight plan that is no longer needed for testing.
 
-  /user_notifications/conflicts/{flight_plan_id}:
+  /user_notifications/conflicts:
     get:
       security:
         - Authority:
             - interuss.flight_planning.direct_automated_test
       parameters:
-        - name: flight_plan_id
-          description: Id of the user's flight plan.
+        - name: from
+          description: >- 
+            The user notifications are included if they were sent after this time. 
+            Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
           schema:
-            $ref: '#/components/schemas/FlightPlanID'
-          in: path
+            $ref: '#/components/schemas/Time'
+          in: query
           required: true
-        - name: after
+        - name: to
+          required: false
           description: >-
-            This paramter is used to filter the notifications. Notifications sent after this time are returned.
-            If this parameter is not provided then all the notification for a flight_plan _id are returned.
+            The user notifications are included if they were sent before or upto this time.
+            Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
           schema:
             anyOf:
               - $ref: '#/components/schemas/Time'
@@ -499,5 +502,5 @@ paths:
           description: No flight plan with flight_plan_id exists.
       summary: User notification of conflicts
       description: >-
-        This endpoint returns the user notifications about conflicts with other operations or constraints, for a flight plan.
-        The implementation of this endpoint will require that the notifications are stored for a flight_plan till the plan is closed.
+        Returns the list of user notifications since the datetime provided in ‘from’ argument until ‘to’ argument by date in descending order. (‘to’ optional. Default: latest)
+        The implementation of this endpoint will require that the notifications be available for querying for a flight_plan till the plan is closed.
