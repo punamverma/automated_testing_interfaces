@@ -15,14 +15,12 @@ components:
             - $ref: './geotemporal.yaml#/components/schemas/Time'
           description: >-
             Time at which the intersection with other operational_intents or constraints was detected by USS.
-            Conflict Notification to user can be sent in two scenarios. For the purpose of tests, 
-            the value of intersection_detected_at is described below for these two cases.
-             - USS managing flights for a user, maintains awareness of any new or modified operational intents.
-            It responds with 204 for any notification received for new or modified operation to the notifying USS, 
+            For the purpose of tests, the value of intersection_detected_at is described below for two scenarios.
+             - USS managing flights for a user, maintains awareness of any new or modified operational intents and constraints.
+            It responds with 204 for any notification received for new or modified operation or constraint to the notifying USS, 
             and checks if any conflict exists. The time the USS responds with 204 will be taken as the value of intersection_detected_at.
-             - USS creates a new flight or modifies an existing flight for user through UpsertFlightPlan. 
-            USS checks for conflicts with existing operational intents in order to create or modify the flight.
-            When successful, the USS responds back with 200 and a planning result as Completed. 
+             - USS checks for conflicts with existing operational intents or constraints while creating or modifying a flight for an UpsertFlightPlan request.
+            When successful, the USS responds back with 200 status and a planning result as Completed. 
             The time USS responds with 200 will be taken as the value of intersection_detected_at.
         notification_sent_at:
           anyOf:
