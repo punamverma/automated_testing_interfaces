@@ -473,11 +473,10 @@ paths:
           description: >- 
             The user notifications are included if they were sent after this time. 
             Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
-          type: string
-            description: >-
-              RFC3339-formatted time/date string.  The time zone must be 'Z'.
+          schema:
+            type: string
             format: date-time
-            example: '2024-04-22T16:36:50.52Z'
+          example: '2024-04-22T16:36:50.52Z'
           in: query
           required: true
         - name: to
@@ -485,11 +484,10 @@ paths:
           description: >-
             The user notifications are included if they were sent before or upto this time.
             Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
-          type: string
-            description: >-
-              RFC3339-formatted time/date string.  The time zone must be 'Z'.
+          schema:
+            type: string
             format: date-time
-            example: '2024-04-22T16:41:50.52Z'
+          example: '2024-04-22T16:41:50.52Z'
           in: query
       responses:
         '200':
