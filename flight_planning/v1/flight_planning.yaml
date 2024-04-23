@@ -471,8 +471,8 @@ paths:
       parameters:
         - name: from
           description: >- 
-            The user notifications are included if they were sent after this time. 
-            Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
+            Filters the user notifications sent after this time. The field 'notification_sent_at' in ConflictNotification 
+            is used for comparison.
           schema:
             type: string
             format: date-time
@@ -482,8 +482,8 @@ paths:
         - name: to
           required: false
           description: >-
-            The user notifications are included if they were sent before or upto this time.
-            Value of 'notification_sent_at' in ConflictNotification would be compared against this value to filter.
+            Filters the user notifications sent before or upto this time. The field 'notification_sent_at' in ConflictNotification 
+            is used for comparison.
           schema:
             type: string
             format: date-time
