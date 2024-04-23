@@ -504,7 +504,7 @@ paths:
           description: The access token was decoded successfully but did not include a scope appropriate to this endpoint.
         '404':
           description: No flight plan with flight_plan_id exists.
-      summary: User notification of conflicts
+      summary: User notification for conflicts
       description: >-
         Returns the list of user notifications since the datetime provided in ‘from’ argument until ‘to’ argument by date in descending order. (‘to’ optional. Default: latest)
         The implementation of this endpoint will require that the notifications be available for querying for a flight_plan till the plan is closed.
