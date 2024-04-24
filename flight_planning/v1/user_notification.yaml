@@ -14,18 +14,18 @@ components:
           anyOf:
             - $ref: './geotemporal.yaml#/components/schemas/Time'
           description: >-
-            Time at which the intersection with other operational_intents or constraints was detected by USS.
+            Time at which the intersection with other operational_intents was detected by USS.
             For the purpose of tests, the value of intersection_detected_at is described below for two scenarios.
-             - USS managing flights for a user, maintains awareness of any new or modified operational intents and constraints.
-            It responds with 204 for any notification received for new or modified operation or constraint to the notifying USS, 
-            and checks if any conflict exists. The time the USS responds with 204 will be taken as the value of intersection_detected_at.
-             - USS checks for conflicts with existing operational intents or constraints while creating or modifying a flight for an UpsertFlightPlan request.
+             - USS managing flights for a user, maintains awareness of any new or modified operational intents.
+            Upon successfully receiving any notification of a new or modified operation the USS responds with status 204 to the notifying USS, 
+            and also checks for any intersections detected. The time the USS responds with 204 will be taken as the value of intersection_detected_at.
+             - USS checks for intersections with existing operational intents or constraints while creating or modifying a flight for an UpsertFlightPlan request.
             When successful, the USS responds back with 200 status and a planning result as Completed. 
             The time USS responds with 200 will be taken as the value of intersection_detected_at.
         notification_sent_at:
           anyOf:
             - $ref: './geotemporal.yaml#/components/schemas/Time'
-          description: Time at which the user was notified about the conflict or intersection.
+          description: Time at which the user or user's automated system was sent user notification about the conflict or intersection.
         impacted_flight_id:
           description: Flight_id of the user flight that is impacted by the conflict.
           type: array
