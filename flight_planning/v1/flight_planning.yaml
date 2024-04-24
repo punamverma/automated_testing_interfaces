@@ -471,8 +471,8 @@ paths:
       parameters:
         - name: from
           description: >- 
-            Filters the user notifications sent after this time. The field 'notification_sent_at' in ConflictNotification 
-            is used for comparison.
+            Parameter to filter the user notifications sent after the specified time. 
+            The property 'notification_sent_at' in ConflictNotification is to be used for comparison.
           schema:
             type: string
             format: date-time
@@ -482,8 +482,8 @@ paths:
         - name: to
           required: false
           description: >-
-            Filters the user notifications sent before or upto this time. The field 'notification_sent_at' in ConflictNotification 
-            is used for comparison.
+            Parameter to filter the user notifications sent till the specified time. 
+            If not provided, then the value defaults to now.
           schema:
             type: string
             format: date-time
@@ -491,7 +491,7 @@ paths:
           in: query
       responses:
         '200':
-          description: Returns list of user notifications sent in the time interval specified by the query parameters.
+          description: Returns a list of user notifications sent in the time interval specified by the query parameters.
           content:
             application/json:
               schema:
@@ -506,5 +506,6 @@ paths:
           description: No flight plan with flight_plan_id exists.
       summary: User notification for conflicts
       description: >-
-        Returns the list of user notifications since the datetime provided in ‘from’ argument until ‘to’ argument by date in descending order. (‘to’ optional. Default: latest)
+        Returns the list of user notifications about conflicts, sent by USS in the time interval specified by query parameters. 
+        The list is in descending order by the property 'notification_sent_at' in ConflictNotification. 
         The implementation of this endpoint will require that the notifications be available for querying for a flight_plan till the plan is closed.
