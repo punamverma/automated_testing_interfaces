@@ -203,6 +203,27 @@ components:
             ID uniquely identifying the upsertion request.  If additional requests are received with the same
             request_id, the response from the first request should be returned, or an error indicated.
 
+    FlightPositionReportPostRequest:
+      description: >-
+        Post the flight position report to the client
+      type: object
+      required:
+        - position_report_id
+        - time_measured
+        - position
+        - velocity
+      properties:
+        position_report:
+          description: Latitude, longitude and altitude of the flight.
+          anyOf:
+            - $ref: './geotemporal.yaml#/components/schemas/PositionReport'
+        position_report_id:
+          type: string
+          description: >-
+            ID uniquely identifying the position report.  If additional requests are received with the same
+            position_report_id, the response from the first request should be returned, or an error indicated.
+
+
     PlanningActivityResult:
       type: string
       description: >-
@@ -283,6 +304,7 @@ components:
             planning activity.
           anyOf:
             - $ref: '#/components/schemas/AdvisoryInclusion'
+
 
     DeleteFlightPlanResponse:
       type: object
@@ -448,6 +470,41 @@ paths:
           description: The request contains a duplicate request_id and the response for that request is not available, or another conflict condition occurred.
 
       summary: Upsert flight plan
+      operationId: UpsertFlightPlan
+      description: >-
+        This endpoint simulates a user intention to submit a new or updated flight plan.
+
+  /flight_position_report/{flight_plan_id}:
+    parameters:
+      - name: flight_plan_id
+        in: path
+        required: true
+        description: A UUID-formatted string identifying the user's flight plan intent.
+        schema:
+          $ref: '#/components/schemas/FlightPlanID'
+
+    post:
+      security:
+        - Authority:
+            - interuss.flight_telemetry
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlightPositionReportPostRequest'
+        required: true
+      responses:
+        '200':
+          description: Requested data was processed successfully
+        '401':
+          description: Bearer access token was not provided in Authorization header, token could not be decoded, or token was invalid.
+        '403':
+          description: The access token was decoded successfully but did not include a scope appropriate to this endpoint.
+        '409':
+          description: The request contains a duplicate request_id and the response for that request is not available, or another conflict condition occurred.
+
+      summary: Post flight position report for flight with flight_plan_id
       operationId: UpsertFlightPlan
       description: >-
         This endpoint simulates a user intention to submit a new or updated flight plan.

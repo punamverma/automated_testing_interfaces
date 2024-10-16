@@ -182,3 +182,58 @@ components:
           description: End time of this volume. Must be after time_start.
           anyOf:
             - $ref: '#/components/schemas/Time'
+
+    PositionReport:
+      description: Specifies the location, velocity and time at which the position of the flight was measured.
+      type: object
+      required:
+        - time_measured
+        - position
+        - velocity
+      properties:
+        time_measured:
+          description: Time the position report was measured.
+          $ref: '#/components/schemas/Time'
+        position:
+          description: Latitude, longitude and altitude of the flight.
+          anyOf:
+            - $ref: '#/components/schemas/Position'
+        velocity:
+          description: Velocity of the flight.
+          anyOf:
+            - $ref: '#/components/schemas/Velocity'
+
+    Position:
+      description: Position of a flight in terms of latitude, longitude and altitude
+      type: object
+      required:
+        - lat
+        - lng
+        - alt
+      properties:
+        lat:
+          description: latitude of the position
+          $ref: '#/components/schemas/Latitude'
+        lng:
+          description: longitude of the position
+          $ref: '#/components/schemas/Longitude'
+        alt:
+          description: altitude of the position
+          $ref: '#/components/schemas/Altitude'
+
+    Velocity:
+      description: Velocity of a flight in terms of latitude, longitude and altitude
+      type: object
+      required:
+        - speed
+        - track
+      properties:
+        speed:
+          description: speed of the flight in meters per second
+          $ref: '#/components/schemas/Latitude'
+        track:
+          description: >- 
+            Direction of flight expressed as a "True North-based" ground track angle. 
+            This value is provided in degrees East of North with a minimum resolution of 1 degree. 
+            A value of 360 indicates invalid, no value, or unknown.
+          $ref: '#/components/schemas/Longitude'
