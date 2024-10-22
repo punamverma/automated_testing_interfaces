@@ -9,8 +9,33 @@ components:
       properties:
         priority:
           $ref: '#/components/schemas/Priority'
+        operator_detected_nonconformance:
+          $ref: '#/components/schemas/OperatorDetectedNonConformance'
+        position_report_details:
+          $ref: '#/components/schemas/PositionReportingDetails'
     Priority:
       description: >-
         Ordinal priority of the operational intent, as defined in ASTM F3548-21.
       type: integer
       default: 0
+    OperatorDetectedNonConformance:
+      description: >-
+        Set to true if the operator cannot provide position-reported nonconformance detection 
+        and will provide nonconformance detection for the flights.
+        By default, the value is set to false. If the value is true, then do not provide PositionReportingDetails.
+      type: boolean
+    PositionReportingDetails:
+      description: >-
+        Details of how the operator would be providing position reports
+      properties: 
+        position_frequency:
+          description: >- 
+            Frequency, in hertz, at which the operator will send the flight position reports to the USS.
+          type: float
+        max_missing_position_data_period: 
+          description: The max time elapsed in seconds, since last position, after which the flight should be considered nonconforaming
+          type: integer. 
+
+
+
+
